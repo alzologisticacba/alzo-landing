@@ -164,47 +164,51 @@ body {
   }
 }
 
-/* CARRUSEL DE MARCAS */
 .brand-carousel {
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   overflow: hidden;
-  position: relative;
-  padding: 8px 0;
+  padding: 10px 0;
 }
-
 
 .brand-track {
   display: flex;
-  align-items: center;
-  gap: 32px;
-  animation: scroll-logos 5s linear infinite;
+  width: max-content;
+  will-change: transform;
+
+  /* se setea por JS */
+  animation: scroll-logos var(--dur, 18s) linear infinite;
 }
 
-.brand-track img {
-  height: 154px;        /* más grandes en general */
+.brand-set {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-right: 32px;
+}
+
+.brand-set img {
+  height: 110px;
+  width: auto;
   object-fit: contain;
   flex-shrink: 0;
-  /* sin sombras ni detalles extras */
-}
-/* Sombra suave superior/inferior opcional (puedes comentar si no te gusta) */
-.brand-carousel::before,
-.brand-carousel::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 40px;
-  pointer-events: none;
 }
 
 @keyframes scroll-logos {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  to { transform: translateX(calc(-1 * var(--scroll, 0px))); }
 }
+
+@media (max-width: 480px) {
+  .brand-set img { height: 90px; }
+}
+
+
+.brand-carousel::before,
+.brand-carousel::after {
+  content: none;
+}
+
 
 /* TARJETAS SOY / QUIERO SER CLIENTE */
 .clients-section {

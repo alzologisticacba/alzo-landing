@@ -25,31 +25,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
 
     {/* Carrusel de marcas */}
-    <div class="brand-carousel">
-      <div class="brand-track">
-        {/* Bloque 1 */}
-        <img src="logos/lucky_logo.png" alt="Lucky Strike" />
-        <img src="logos/camel_logo.png" alt="Camel" />
-        <img src="logos/nosotras_logo.png" alt="Nosotras" />
-        <img src="logos/rinde2_logo.png" alt="Rinde 2" />
-        <img src="logos/alka_logo.png" alt="Alka" />
-        <img src="logos/bic_logo.png" alt="Bic" />
-        <img src="logos/calipso_logo.png" alt="Calipso" />
-        <img src="logos/lia_logo.png" alt="Lía" />
-        <img src="logos/misky_logo.png" alt="Misky" />
-
-        {/* Bloque 2 (repetido para efecto infinito) */}
-        <img src="logos/lucky_logo.png" alt="Lucky Strike" />
-        <img src="logos/camel_logo.png" alt="Camel" /> 
-        <img src="logos/nosotras_logo.png" alt="Nosotras" />
-        <img src="logos/rinde2_logo.png" alt="Rinde 2" />
-        <img src="logos/alka_logo.png" alt="Alka" />
-        <img src="logos/bic_logo.png" alt="Bic" />
-        <img src="logos/calipso_logo.png" alt="Calipso" />
-        <img src="logos/lia_logo.png" alt="Lía" />
-        <img src="logos/misky_logo.png" alt="Misky" />
-      </div>
+<div class="brand-carousel">
+  <div class="brand-track" aria-label="Marcas">
+    <div class="brand-set">
+      <img src="logos/lucky_logo.png" alt="Lucky Strike" />
+      <img src="logos/camel_logo.png" alt="Camel" />
+      <img src="logos/nosotras_logo.png" alt="Nosotras" />
+      <img src="logos/rinde2_logo.png" alt="Rinde 2" />
+      <img src="logos/alka_logo.png" alt="Alka" />
+      <img src="logos/bic_logo.png" alt="Bic" />
+      <img src="logos/calipso_logo.png" alt="Calipso" />
+      <img src="logos/lia_logo.png" alt="Lía" />
+      <img src="logos/misky_logo.png" alt="Misky" />
     </div>
+  </div>
+</div>
 
 
     <div class="hero-header">
@@ -347,6 +337,51 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         },
       }
     );
+  });
+</script>
+<script>
+  function setupMarquee() {
+    const carousel = document.querySelector(".brand-carousel");
+    const track = document.querySelector(".brand-track");
+    const firstSet = document.querySelector(".brand-set");
+    if (!carousel || !track || !firstSet) return;
+
+    // Limpia clones anteriores (por si hot reload)
+    [...track.querySelectorAll(".brand-set")].slice(1).forEach(n => n.remove());
+
+    // Espera a que las imágenes tengan su tamaño real
+    const imgs = firstSet.querySelectorAll("img");
+    const waitImgs = [...imgs].map(img =>
+      img.complete ? Promise.resolve() : new Promise(res => {
+        img.addEventListener("load", res, { once: true });
+        img.addEventListener("error", res, { once: true });
+      })
+    );
+
+    Promise.all(waitImgs).then(() => {
+      const setWidth = firstSet.getBoundingClientRect().width;
+      const needed = Math.ceil((carousel.clientWidth * 2) / setWidth) + 1;
+
+      // Clona sets suficientes para que nunca haya huecos
+      for (let i = 0; i < needed; i++) {
+        const clone = firstSet.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+      }
+
+      // Distancia exacta de 1 set (en px)
+      track.style.setProperty("--scroll", `${setWidth}px`);
+
+      // Duración proporcional: ajustá la velocidad sin romper el loop
+      const pxPerSecond = 90; // más alto = más rápido
+      track.style.setProperty("--dur", `${setWidth / pxPerSecond}s`);
+    });
+  }
+
+  window.addEventListener("load", setupMarquee);
+  window.addEventListener("resize", () => {
+    clearTimeout(window.__marq);
+    window.__marq = setTimeout(setupMarquee, 150);
   });
 </script>
 </BaseLayout>

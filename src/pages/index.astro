@@ -1,0 +1,352 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Alzo">
+
+  <header class="top-nav">
+    <div class="top-nav-inner">
+
+      <nav class="top-nav-links">
+        <a href="#inicio">Alzo</a>
+        <a href="#clientes">Clientes</a>
+        <a href="#conecta">Conecta</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+  {/* HERO: logo y marcas */}
+  <section  id="inicio" class="hero hero-content">  
+    <div class="hero-header">
+      <div class="hero-logo">
+        <img src="/logos/alzo_logo.png" alt="Alzo" class="hero-logo-img" />
+      </div>
+      <div class="hero-subtitle">DISTRIBUIDOR OFICIAL</div>
+    </div>
+
+    {/* Carrusel de marcas */}
+    <div class="brand-carousel">
+      <div class="brand-track">
+        {/* Bloque 1 */}
+        <img src="/logos/lucky_logo.png" alt="Lucky Strike" />
+        <img src="/logos/camel_logo.png" alt="Camel" />
+        <img src="/logos/nosotras_logo.png" alt="Nosotras" />
+        <img src="/logos/rinde2_logo.png" alt="Rinde 2" />
+        <img src="/logos/alka_logo.png" alt="Alka" />
+        <img src="/logos/bic_logo.png" alt="Bic" />
+        <img src="/logos/calipso_logo.png" alt="Calipso" />
+        <img src="/logos/lia_logo.png" alt="Lía" />
+        <img src="/logos/misky_logo.png" alt="Misky" />
+
+        {/* Bloque 2 (repetido para efecto infinito) */}
+        <img src="/logos/lucky_logo.png" alt="Lucky Strike" />
+        <img src="/logos/camel_logo.png" alt="Camel" /> 
+        <img src="/logos/nosotras_logo.png" alt="Nosotras" />
+        <img src="/logos/rinde2_logo.png" alt="Rinde 2" />
+        <img src="/logos/alka_logo.png" alt="Alka" />
+        <img src="/logos/bic_logo.png" alt="Bic" />
+        <img src="/logos/calipso_logo.png" alt="Calipso" />
+        <img src="/logos/lia_logo.png" alt="Lía" />
+        <img src="/logos/misky_logo.png" alt="Misky" />
+      </div>
+    </div>
+
+
+    <div class="hero-header">
+      <p class="hero-text">
+        ¡Estos son algunos de nuestros socios estrategicos!
+      </p>
+    </div>
+
+  </section>
+
+{/* Sección clientes con métricas */}
+  <section id="clientes" class="clients-section">
+    <div class="clients-grid">
+      {/* + 4.000 clientes */}
+      <div class="clients-stat clients-stat--clientes">
+        <span
+          class="clients-stat-number"
+          data-target="4000"
+        >
+          +4.000
+        </span>
+        <span class="clients-stat-label">Clientes</span>
+      </div>
+
+      {/* Soy cliente */}
+      <article class="client-card card client-card--top client-card--highlight">
+        
+        <h3>Soy cliente</h3>
+        
+        <p>Información útil para clientes actuales</p>
+        <img
+          src="/img/soycliente.png"
+          alt="Soy cliente Alzo"
+          class="client-card-img"
+        />
+        <a href="#soy-cliente" class="btn btn-primary">
+          Información para clientes
+        </a>
+      </article>
+
+      {/* Quiero ser cliente */}
+      <article class="client-card card client-card--bottom client-card--highlight">
+        <h3>Quiero ser cliente</h3>
+        <p>Sumá tu kiosco, autoservicio o comercio.</p>
+        <img
+          src="/img/quierosercliente.png"
+          alt="Soy cliente Alzo"
+          class="client-card-img"
+        />
+        <a href="#contacto" class="btn btn-primary">
+          Contactanos
+        </a>
+      </article>
+
+      {/* + 1.000.000 pedidos entregados */}
+      <div class="clients-stat clients-stat--pedidos">
+        <span
+          class="clients-stat-number"
+          data-target="2000000"
+        >
+          +2.000.000
+        </span>
+        <span class="clients-stat-label">Pedidos entregados</span>
+      </div>
+    </div>
+  </section>
+
+  {/* Bloque conectaMarket */}
+{/* Bloque conectaMarket */}
+<section id="conecta" class="conecta-section conecta-block">
+  <div class="conecta-inner">
+    <div class="conecta-layout">
+      {/* Lado izquierdo: logo grande */}
+      <div class="conecta-logo-box">
+        <img
+          src="/img/conecta.png"
+          alt="Conecta Market"
+          class="conecta-logo-img"
+        />
+      </div>
+
+      {/* Lado derecho: tarjeta blanca con texto + botón */}
+      <article class="conecta-card">
+        <h2>Hacé tu pedido fácil y rápido</h2>
+        <p>Plataforma online exclusiva para nuestros clientes.</p>
+
+        <a
+          href="https://conectamarket.com.ar"
+          target="_blank"
+          rel="noreferrer"
+          class="btn btn-primary conecta-btn"
+        >
+          Ir a Conecta
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+  {/* Contacto / WhatsApp */}
+  <section id="contacto" class="contact-section contact-section-anim">
+    <h2>Contactanos</h2>
+
+    <div class="contact-cards">
+
+      <article class="contact-card contact-card-anim">
+        <div class="whatsapp-icon">
+          <img src="/img/whatsapp.png" alt="WhatsApp" />
+        </div>
+        <span>ADMINISTRACIÓN</span>
+        <small>Facturación y cobranzas</small>
+         <a
+        href="https://wa.me/5493512029862"
+        rel="noreferrer"
+        class="btn-whatsapp"
+      >
+        Escribir por WhatsApp
+      </a>
+      </article>
+
+      <article class="contact-card contact-card-anim">
+        <div class="whatsapp-icon">
+          <img src="/img/whatsapp.png" alt="WhatsApp" />
+        </div>
+        <span>CANAL DIGITAL</span>
+        <small>Pedidos y consultas online</small>
+        <a
+        href="https://wa.me/5493513276516"
+        target="_blank"
+        rel="noreferrer"
+        class="btn-whatsapp"
+      >
+        Escribir por WhatsApp
+      </a>
+      </article>
+
+      <article class="contact-card contact-card-anim">
+        <div class="whatsapp-icon">
+          <img src="/img/whatsapp.png" alt="WhatsApp" />
+        </div>
+        <span>CANAL MAYORISTA</span>
+        <small>Grandes cuentas y empresas</small>
+        <a
+        href="https://wa.me/5493516316968"
+        target="_blank"
+        rel="noreferrer"
+        class="btn-whatsapp"
+      >
+        Escribir por WhatsApp
+      </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Script GSAP -->
+  <script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.addEventListener("load", () => {
+    // =========================
+    // HERO (primer pantalla)
+    // =========================
+    gsap.from(".hero-content", {
+      opacity: 0,
+      y: -80,
+      scale: 0.95,
+      duration: 1.4,
+      ease: "power4.out",
+    });
+
+    // Logos de marcas (carrusel)
+    gsap.from(".brand-track img", {
+      opacity: 0,
+      y: 60,
+      duration: 1,
+      stagger: 0.08,
+      delay: 0.4,
+      ease: "power3.out",
+    });
+
+    // =========================
+    // SECCIÓN CLIENTES
+    // =========================
+
+    // Cards (Soy cliente / Quiero ser cliente) – fuerte al entrar y salir
+    gsap.fromTo(
+      ".client-card",
+      { autoAlpha: 0, y: 90, scale: 0.9 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        stagger: 0.25,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".clients-section",
+          start: "top 70%",
+          end: "bottom 40%",
+          toggleActions: "play reverse play reverse", // entra y sale
+        },
+      }
+    );
+
+    // Stats (+4.000 / +1.000.000) – entrada lateral + fade
+    gsap.fromTo(
+      ".clients-stat",
+      { autoAlpha: 0, y: 60, x: -40 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        x: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".clients-section",
+          start: "top 70%",
+          end: "bottom 40%",
+          toggleActions: "play reverse play reverse",
+        },
+      }
+    );
+
+    // Conteo de números (+4.000, +1.000.000) cada vez que entran
+    const formatNumber = (value) =>
+      value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    gsap.utils.toArray(".clients-stat-number").forEach((el) => {
+      const target = Number(el.dataset.target) || 0;
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 80%",
+        onEnter() {
+          const obj = { value: 0 };
+          gsap.to(obj, {
+            value: target,
+            duration: 1.6,
+            ease: "power3.out",
+            onUpdate() {
+              const current = Math.floor(obj.value);
+              el.textContent = `+ ${formatNumber(current)}`;
+            },
+          });
+        },
+        onLeaveBack() {
+          // al volver hacia arriba, reseteamos para que vuelva a contar
+          el.textContent = "+ 0";
+        },
+      });
+    });
+
+    // =========================
+    // CONECTA
+    // =========================
+    gsap.fromTo(
+      ".conecta-block",
+      { autoAlpha: 0, y: 80, scale: 0.9 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".conecta-block",
+          start: "top 80%",
+          end: "bottom 40%",
+          toggleActions: "play reverse play reverse",
+        },
+      }
+    );
+
+    // =========================
+    // CONTACTO
+    // =========================
+    gsap.fromTo(
+      ".contact-card-anim",
+      { autoAlpha: 0, y: 80, scale: 0.9 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.9,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".contact-section-anim",
+          start: "top 80%",
+          end: "bottom 40%",
+          toggleActions: "play reverse play reverse",
+        },
+      }
+    );
+  });
+</script>
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+import "../styles/soy-cliente.css";
+---
+
+<header class="top-nav">
+  <div class="top-nav-inner">
+    <nav class="top-nav-links">
+      <a href={`${import.meta.env.BASE_URL}`}>Alzo</a>
+      <a href={`${import.meta.env.BASE_URL}#clientes`}>Clientes</a>
+      <a href={`${import.meta.env.BASE_URL}#conecta`}>Conecta</a>
+      <a href={`${import.meta.env.BASE_URL}#contacto`}>Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<div class="login-box">
+  <div class="icon"></div>
+  
+  <h2>¿Cuándo Llegamos?</h2>
+  <img
+          src="img/cuandollegamos.png"
+          alt="Cuando llegamos"
+          class="client-card-img"
+  />  
+  <div class="input-group">
+    <input type="text" id="codigo" placeholder="Código de Cliente" />
+  </div>
+  <div class="ayuda-cliente">
+      <i class="fas fa-circle-info"></i>
+      <a href="img/nrocliente.jpg" target="_blank">¿Cómo conocer mi número de cliente?</a>
+    </div>
+
+  <button id="btn-consultar" type="button">Consultar</button>
+
+  <div id="resultado"></div>
+</div>
+
+<script type="module" src="/src/pages/api/consultarDatos.js"></script>

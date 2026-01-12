@@ -738,3 +738,27 @@ body {
     margin-top: 12px;
   }
 }
+
+@media (min-width: 768px) {
+  .client-card {
+    max-width: 380px;   
+    padding: 20px 18px; 
+  }
+
+  .client-card h3 {
+    font-size: 26px;
+  }
+
+  .client-card p {
+    font-size: 14px;
+  }
+
+  .client-card-img {
+    max-width: 180px;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 9px 18px;
+  }
+}

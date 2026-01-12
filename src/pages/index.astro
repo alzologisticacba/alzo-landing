@@ -16,7 +16,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </header>
 
-  <section  id="inicio" class="hero hero-content">  
+  <section  id="inicio" class="hero hero-content" data-scroll-center>  
     <div class="hero-header">
       <div class="hero-logo">
         <img src="logos/alzo_logo.png" alt="Alzo" class="hero-logo-img" />
@@ -53,19 +53,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 {/* Sección clientes con métricas */}
   <section id="clientes" class="clients-section">
     <div class="clients-grid">
-      {/* + 4.000 clientes */}
-      <div class="clients-stat clients-stat--clientes">
-        <span
-          class="clients-stat-number"
-          data-target="4000"
-        >
-          +4.000
-        </span>
-        <span class="clients-stat-label">Clientes</span>
-      </div>
+      
 
       {/* Soy cliente */}
-      <article class="client-card card client-card--top client-card--highlight">
+      <article class="client-card card client-card--top client-card--highlight"  data-scroll-target="clientes">
         
         <h3>Soy cliente</h3>
         
@@ -76,9 +67,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           class="client-card-img"
         />
         <a href="./soy-cliente" class="btn btn-primary">
-  Información para clientes
-</a>
+          Información para clientes
+        </a>
       </article>
+
+      {/* + 4.000 clientes */}
+      <div class="clients-stat clients-stat--clientes">
+        <span
+          class="clients-stat-number"
+          data-target="4000"
+        >
+          +4.000
+        </span>
+        <span class="clients-stat-label">Clientes</span>
+      </div>
 
       {/* Quiero ser cliente */}
       <article class="client-card card client-card--bottom client-card--highlight">
@@ -140,7 +142,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </section>
   {/* Contacto / WhatsApp */}
   <section id="contacto" class="contact-section contact-section-anim">
-    <h2>Contactanos</h2>
+    <h2 data-scroll-target="contacto">Contactanos</h2>
 
     <div class="contact-cards">
 
@@ -193,8 +195,95 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
+<script>
+  function navHeight() {
+    const nav = document.querySelector(".top-nav");
+    return nav ? nav.getBoundingClientRect().height : 0;
+  }
+
+  // Offsets por breakpoint
+  // Ajustá los valores mobile/tablet a gusto.
+  const OFFSETS = {
+    desktop: {  // >= 1024
+      "#inicio": 0,
+      "#clientes": 110,
+      "#conecta": 40,
+      "#contacto": 20,
+    },
+    tablet: {   // 768 - 1023
+      "#inicio": 0,
+    "#clientes": 150,
+    "#conecta": 40,
+    "#contacto": 20,
+    },
+    mobile: {   // < 768
+      "#inicio": 0,
+    "#clientes": 150,
+    "#conecta": 40,
+    "#contacto": 20,
+    },
+  };
+
+  function currentOffsets() {
+    const w = window.innerWidth;
+    if (w >= 1024) return OFFSETS.desktop;
+    if (w >= 768) return OFFSETS.tablet;
+    return OFFSETS.mobile;
+  }
+
+  function scrollToNice(hash) {
+    const section = document.querySelector(hash);
+    if (!section) return;
+
+    const key = hash.replace("#", "");
+    const target =
+      section.querySelector(`[data-scroll-target="${key}"]`) || section;
+
+    const rect = target.getBoundingClientRect();
+    const baseTop = rect.top + window.scrollY;
+
+    const extra = (currentOffsets()[hash] ?? 0);
+
+    const top = baseTop - navHeight() - extra;
+
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+
+    const hash = a.getAttribute("href");
+    if (!hash || hash === "#") return;
+
+    if (!document.querySelector(hash)) return;
+
+    e.preventDefault();
+    history.pushState(null, "", hash);
+    scrollToNice(hash);
+  });
+
+  window.addEventListener("load", () => {
+    if (location.hash && document.querySelector(location.hash)) {
+      scrollToNice(location.hash);
+    }
+  });
+
+  // Si el usuario rota el teléfono o cambia tamaño, re-aplica el offset al hash actual
+  window.addEventListener("resize", () => {
+    clearTimeout(window.__navResizeT);
+    window.__navResizeT = setTimeout(() => {
+      if (location.hash && document.querySelector(location.hash)) {
+        scrollToNice(location.hash);
+      }
+    }, 150);
+  });
+</script>
+
+
+
   <!-- Script GSAP -->
-  <script>
+<script>
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -346,10 +435,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     const firstSet = document.querySelector(".brand-set");
     if (!carousel || !track || !firstSet) return;
 
-    // Limpia clones anteriores (por si hot reload)
     [...track.querySelectorAll(".brand-set")].slice(1).forEach(n => n.remove());
 
-    // Espera a que las imágenes tengan su tamaño real
+
     const imgs = firstSet.querySelectorAll("img");
     const waitImgs = [...imgs].map(img =>
       img.complete ? Promise.resolve() : new Promise(res => {
@@ -362,18 +450,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       const setWidth = firstSet.getBoundingClientRect().width;
       const needed = Math.ceil((carousel.clientWidth * 2) / setWidth) + 1;
 
-      // Clona sets suficientes para que nunca haya huecos
       for (let i = 0; i < needed; i++) {
         const clone = firstSet.cloneNode(true);
         clone.setAttribute("aria-hidden", "true");
         track.appendChild(clone);
       }
-
-      // Distancia exacta de 1 set (en px)
       track.style.setProperty("--scroll", `${setWidth}px`);
 
-      // Duración proporcional: ajustá la velocidad sin romper el loop
-      const pxPerSecond = 90; // más alto = más rápido
+      const pxPerSecond = 90;
       track.style.setProperty("--dur", `${setWidth / pxPerSecond}s`);
     });
   }

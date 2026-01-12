@@ -4,5 +4,5 @@ const isProd = process.env.NODE_ENV === "production";
 
 export default defineConfig({
   site: "https://alzologisticacba.github.io",
-  base: isProd ? "/alzo-landing" : "/",
+  base: isProd ? "/alzo-landing/" : "/",
 });
